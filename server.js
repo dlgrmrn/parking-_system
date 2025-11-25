@@ -71,21 +71,6 @@ app.get("/cars", async (req, res) => {
   }
 });
 
-// Add a new car
-app.post("/cars", async (req, res) => {
-  const { cars_id, serial_number, brand, mark, park_id } = req.body;
-  try {
-    await pool.query(
-      "INSERT INTO cars (cars_id, serial_number, brand, mark, park_id) VALUES ($1, $2, $3, $4, $5)",
-      [cars_id, serial_number, brand, mark, park_id]
-    );
-    res.status(201).json({ message: "Car added successfully" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server error" });
-  }
-});
-
 // Delete a car
 app.delete("/cars/:id", async (req, res) => {
   const { id } = req.params;
